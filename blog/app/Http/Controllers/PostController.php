@@ -3,59 +3,68 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Post;
+use App\Models\User;
 
 class PostController extends Controller
 {
     //
     public function index()
     {
-        $posts = [
-            ['id' => 1, 'title' => 'Laravel', 'post_creator' => 'Ahmed', 'created_at' => '2022-04-16 10:37:00'],
-            ['id' => 2, 'title' => 'PHP', 'post_creator' => 'Mohamed', 'created_at' => '2022-04-16 10:37:00'],
-            ['id' => 3, 'title' => 'Javascript', 'post_creator' => 'Ali', 'created_at' => '2022-04-16 10:37:00'],
-        ];
+        $posts = Post::all();
 
-        return view('posts.index',[
+        return view('posts.index', [
             'posts' => $posts,
-            ]);
+        ]);
     }
 
     public function create()
     {
-        return view('posts.create');
+        $users = User::all();
+
+        return view('posts.create', [
+            'users' => $users
+        ]);
     }
 
     public function store()
     {
-        return 'Post is stored successfully';
+        $data = request()->all();
+
+        Post::create([
+            'title' => $data['title'],
+            'description' => $data['description'],
+            'user_id' => $data['post_creator'],
+
+        ]);
+
+        return redirect(route("posts.index"));
     }
 
     public function show($postId)
     {
-        $posts = [
-            ['id' => 1, 'title' => 'Laravel', 'post_creator' => 'Ahmed', 'created_at' => '2022-04-16 10:37:00'],
-            ['id' => 2, 'title' => 'PHP', 'post_creator' => 'Mohamed', 'created_at' => '2022-04-16 10:37:00'],
-            ['id' => 3, 'title' => 'Javascript', 'post_creator' => 'Ali', 'created_at' => '2022-04-16 10:37:00'],
-        ];
-        $post=$posts[$postId-1];
+        $post = Post::find($postId);
+
         return view('posts.show', [
             'post' => $post,
         ]);
     }
-    public function edit($postId){
-        $posts = [
-            ['id' => 1, 'title' => 'Laravel', 'post_creator' => 'Ahmed', 'created_at' => '2022-04-16 10:37:00'],
-            ['id' => 2, 'title' => 'PHP', 'post_creator' => 'Mohamed', 'created_at' => '2022-04-16 10:37:00'],
-            ['id' => 3, 'title' => 'Javascript', 'post_creator' => 'Ali', 'created_at' => '2022-04-16 10:37:00'],
-        ];
-        $post=$posts[$postId-1];
+    public function edit($postId)
+    {
+        $post = Post::find($postId);
+        $users = User::all();
+
         return view('posts.edit', [
             'post' => $post,
+            'users' => $users,
         ]);
     }
-    public function update($postId)
+    public function update(Request $request, $postId)
     {
-        return 'Post of id '. $postId.' is updated successfully';
-    }
+        $post = Post::find($postId);
+        $post->fill($request->input())->save();
 
+
+        return redirect(route('posts.index')) ->with('success', 'Post updated successfully');
+    }
 }

@@ -31,8 +31,8 @@
                     <tr>
                         <td>{{ $post['id'] }}</td>
                         <td>{{ $post['title'] }}</td>
-                        <td>{{ $post['post_creator'] }}</td>
-                        <td>{{ $post['created_at'] }}</td>
+                        <td>{{$post->user ? $post->user->name : 'Not Found'}}</td>
+                        <td>{{$post->created_at ? $post->created_at : 'Date is not available'}}</td>
                         <td>
                             <a href="{{ route('posts.show', ['post' => $post['id']]) }}" class="view" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>
                             <a href="{{ route('posts.edit', ['post' => $post['id']]) }}" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
