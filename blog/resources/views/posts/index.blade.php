@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title')All posts @endsection
 
 
 @section('content')
@@ -10,7 +11,7 @@
                     <div class="col-sm-8"><h2>Posts <b>Details</b></h2></div>
                     <div class="col-sm-4">
                         <div class="search-box">
-                        <a href="" class="mt-4 btn btn-success">Create Post</a>
+                        <a href="{{ route('posts.create') }}" class="mt-4 btn btn-success">Create Post</a>
                         </div>
                     </div>
                 </div>

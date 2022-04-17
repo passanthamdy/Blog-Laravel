@@ -27,11 +27,19 @@ class PostController extends Controller
 
     public function store()
     {
-        return 'we are in store';
+        return 'Post Stored successfully';
     }
 
     public function show($postId)
     {
-        return $postId;
+        $posts = [
+            ['id' => 1, 'title' => 'Laravel', 'post_creator' => 'Ahmed', 'created_at' => '2022-04-16 10:37:00'],
+            ['id' => 2, 'title' => 'PHP', 'post_creator' => 'Mohamed', 'created_at' => '2022-04-16 10:37:00'],
+            ['id' => 3, 'title' => 'Javascript', 'post_creator' => 'Ali', 'created_at' => '2022-04-16 10:37:00'],
+        ];
+        $post=$posts[$postId-1];
+        return view('posts.show', [
+            'post' => $post,
+        ]);
     }
 }
