@@ -1,19 +1,17 @@
-
-
 @extends('layouts.app')
 
 @section('title')Create Post @endsection
 
 @section('content')
-        <form method="POST" action="{{ route('posts.store')}}">
+        <form method="POST" action="{{ route('posts.update' ,['post' => $post['id']])}}">
             @csrf
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Title</label>
-                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="" >
+                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="" value="{{$post['title']}}">
             </div>
             <div class="mb-3">
                 <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" value="description ..."></textarea>
             </div>
 
             <div class="mb-3">
@@ -25,6 +23,6 @@
                 </select>
             </div>
 
-          <button class="btn btn-success">Create</button>
+          <button class="btn btn-success">Update</button>
         </form>
 @endsection

@@ -27,7 +27,7 @@ class PostController extends Controller
 
     public function store()
     {
-        return 'Post Stored successfully';
+        return 'Post is stored successfully';
     }
 
     public function show($postId)
@@ -42,4 +42,20 @@ class PostController extends Controller
             'post' => $post,
         ]);
     }
+    public function edit($postId){
+        $posts = [
+            ['id' => 1, 'title' => 'Laravel', 'post_creator' => 'Ahmed', 'created_at' => '2022-04-16 10:37:00'],
+            ['id' => 2, 'title' => 'PHP', 'post_creator' => 'Mohamed', 'created_at' => '2022-04-16 10:37:00'],
+            ['id' => 3, 'title' => 'Javascript', 'post_creator' => 'Ali', 'created_at' => '2022-04-16 10:37:00'],
+        ];
+        $post=$posts[$postId-1];
+        return view('posts.edit', [
+            'post' => $post,
+        ]);
+    }
+    public function update($postId)
+    {
+        return 'Post of id '. $postId.' is updated successfully';
+    }
+
 }
