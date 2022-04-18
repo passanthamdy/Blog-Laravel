@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
@@ -44,9 +45,14 @@ class PostController extends Controller
     public function show($postId)
     {
         $post = Post::find($postId);
+        $users = User::all();
+        $comments = Comment::all();
+
 
         return view('posts.show', [
             'post' => $post,
+            'users' => $users,
+            'comments'=> $comments
         ]);
     }
     public function edit($postId)
