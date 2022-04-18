@@ -65,12 +65,11 @@ class PostController extends Controller
         $post->fill($request->input())->save();
 
 
-        return redirect(route('posts.index')) ->with('success', 'Post updated successfully');
+        return redirect(route('posts.index'))->with('success', 'Post updated successfully');
     }
     public function delete($postId)
     {
-       Post::find($postId)->delete();
-       return back();
-
+        Post::find($postId)->delete();
+        return back();
     }
 }
