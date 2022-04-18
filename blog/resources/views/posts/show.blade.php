@@ -19,14 +19,14 @@ use Carbon\Carbon;
   </div>
 </div>
 <br>
-@foreach ( $comments as $comment)
+@foreach ( $post->comments as $comment)
 
 <div class="card">
     <div class="card-header">
         {{$comment->user->name}}
     </div>
     <div class="card-body">
-        <h5 class="card-title"> {{$comment->content}} </h5>
+        <h5 class="card-title"> {{$comment->body}} </h5>
         <p> {{Carbon::parse($comment->created_at)->format('M d Y')}} </p>
     </div>
 </div>

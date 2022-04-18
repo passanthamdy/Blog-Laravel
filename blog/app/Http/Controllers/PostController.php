@@ -46,7 +46,8 @@ class PostController extends Controller
     {
         $post = Post::find($postId);
         $users = User::all();
-        $comments = Comment::all();
+        //post->comments
+        $comments = $post->comments;
 
 
         return view('posts.show', [
@@ -69,8 +70,6 @@ class PostController extends Controller
     {
         $post = Post::find($postId);
         $post->fill($request->input())->save();
-
-
         return redirect(route('posts.index'))->with('success', 'Post updated successfully');
     }
     public function delete($postId)

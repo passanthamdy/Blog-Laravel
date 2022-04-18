@@ -25,37 +25,25 @@ class CommentsController extends Controller
     public function create()
     {
         $users = User::all();
-        $comments = Comment::paginate(3);
 
         return view('posts.show', [
             'users' => $users,
-            'comments' => $comments,
         ]);
     }
 
-
-    public function store($postId)
+    public function store(Request $request, $postId)
     {
-        $data = request()->all();
-        Comment::create([
-            'content' => $data['body'],
-            'user_id' => $data['post_creator'],
-            'post_id' => $postId,
-        ]);
-        return redirect()->route('posts.show',['post' => $postId]);
+        $comment = new Comment;
+        $comment->body = $request->get('body');
+        $comment->user_id =$request->get('post_creator');
+        $post = Post::find($postId);
+        $post->comments()->save($comment);
 
+        return back();
     }
-
-
-    public function show(Comment $comment)
-    {
-
-    }
-
 
     public function edit(Comment $comment)
     {
-
     }
 
     public function update(Request $request, Comment $comment)
