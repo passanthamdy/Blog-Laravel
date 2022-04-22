@@ -6,7 +6,7 @@ use App\Models\Comment;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
-
+use App\Http\Requests\StorePostRequest;
 class PostController extends Controller
 {
     //
@@ -28,7 +28,7 @@ class PostController extends Controller
         ]);
     }
 
-    public function store()
+    public function store(StorePostRequest $request)
     {
         $data = request()->all();
 
@@ -66,7 +66,7 @@ class PostController extends Controller
             'users' => $users,
         ]);
     }
-    public function update(Request $request, $postId)
+    public function update(Request $request, $postId, StorePostRequest $req)
     {
         $post = Post::find($postId);
         $post->fill($request->input())->save();

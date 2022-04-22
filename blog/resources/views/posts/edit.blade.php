@@ -6,6 +6,16 @@
 <form method="POST" action="{{ route('posts.update' ,['post' => $post['id']])}}">
     @csrf
     {{ method_field('PUT') }}
+    <br><br>
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
     <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Title</label>
         <input name="title" type="text" class="form-control" id="exampleFormControlInput1" placeholder="" value="{{$post->title}}">
