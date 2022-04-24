@@ -26,8 +26,6 @@ class StorePostRequest extends FormRequest
         return [
             'title' =>['required', 'min:3', 'unique:App\Models\Post,title'],
             'description' => ['required' , 'min:5'],
-            'image' => ['required'],
-
             //
         ];
     }

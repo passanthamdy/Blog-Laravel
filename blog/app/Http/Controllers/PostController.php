@@ -33,12 +33,15 @@ class PostController extends Controller
         $data = request()->all();
         $request->validate([
 
-            'image' => 'required|mimes:jpeg,png,jpg|max:2048',
+            'image' => 'mimes:jpeg,png,jpg|max:2048',
 
         ]);
+        $final_path=$name='';
+        if($request->file('image')){
         $name = $request->file('image')->getClientOriginalName();
         $path = $request->file('image')->store('public/images');
         $final_path=str_replace('public/', '',$path);
+        }
         Post::create([
             'title' => $data['title'],
             'description' => $data['description'],
