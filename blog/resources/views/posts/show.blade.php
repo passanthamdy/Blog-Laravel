@@ -16,6 +16,14 @@ use Carbon\Carbon;
   <h5 class="card-title">Post Date : {{$post->created_at ? Carbon::parse($post->created_at)->format('M d Y'): 'Date is not available'}}</h5>
     <h5 class="card-title">Post Creator : {{$post->user->name}}</h5>
     <p class="card-text">{{$post->description}}</p>
+
+
+    @if($post->path)
+
+    <img   src="http://127.0.0.1:8000/storage/{{$post->path}}" style="height: 350px; width: 450px;">
+    @else
+    <p>No image to display</p>
+    @endif
   </div>
 </div>
 <br>

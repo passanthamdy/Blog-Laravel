@@ -3,7 +3,7 @@
 @section('title')Create Post @endsection
 
 @section('content')
-<form method="POST" action="{{ route('posts.update' ,['post' => $post['id']])}}">
+<form method="POST" action="{{ route('posts.update' ,['post' => $post['id']])}}" enctype="multipart/form-data">
     @csrf
     {{ method_field('PUT') }}
     <br><br>
@@ -35,7 +35,16 @@
             @endforeach
         </select>
     </div>
+    <div class="mb-3">
+    <?php ?>
+    @if($post->path)
+    <img   src="http://127.0.0.1:8000/storage/{{$post->path}}" style="height: 100px; width: 150px;">
+    @else
+    <p>No image to display</p>
+    @endif
+    <input type="file" name="image" placeholder="Choose image" id="image">
 
+    </div>
     <button class="btn btn-success">Update</button>
 </form>
 @endsection

@@ -27,6 +27,7 @@ use Carbon\Carbon;
                     <tr>
                         <th>#</th>
                         <th>Title <i class="fa fa-sort"></i></th>
+                        <th>Slug</th>
                         <th>Post Creator</th>
                         <th>Created At <i class="fa fa-sort"></i></th>
                         <th>Actions</th>
@@ -37,6 +38,7 @@ use Carbon\Carbon;
                     <tr>
                         <td>{{ $post['id'] }}</td>
                         <td>{{ $post['title'] }}</td>
+                        <td>{{$post->slug ? $post->slug : 'Not Found Slug'}}</td>
                         <td>{{$post->user ? $post->user->name : 'Not Found'}}</td>
                         <td>{{$post->created_at ? Carbon::parse($post->created_at)->format('M d Y') : 'Date is not available'}}</td>
                         <td>

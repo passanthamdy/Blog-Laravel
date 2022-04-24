@@ -4,7 +4,7 @@
 
 @section('content')
 
-<form method="POST" action="{{ route('posts.store')}}">
+<form method="POST" action="{{ route('posts.store')}}"  enctype="multipart/form-data">
     @csrf
     <br><br>
     @if ($errors->any())
@@ -24,7 +24,10 @@
         <label for="exampleFormControlTextarea1" class="form-label">Description</label>
         <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
     </div>
-
+    <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">Upload image</label>
+        <input type="file" name="image" placeholder="Choose image" id="image">
+    </div>
     <div class="mb-3">
         <label for="exampleFormControlTextarea1" class="form-label">Post Creator</label>
         <select name="post_creator" class="form-control">
